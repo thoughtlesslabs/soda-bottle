@@ -5,35 +5,45 @@ __lua__
 -- a thoughtless labs experiment
 
 function _init()
-    power = 0
-    power_max = 100
-    x = 0
-    y = 0
+ power = 0
+ power_max = 60
+ x = 0
+ y = 0
+ r = 4
+ c = 7
+ xmax = 20
 end
 
 function _update()
-    if btn(4) then
-        power += 1
-        bottle_shake()
-    end
-    if power == power_max then 
-        bottle_explode()
-    end
+	if power < power_max then
+		if btn(4) then
+	  power += 1
+	  bottle_shake()
+	 end
+	else 
+	  bottle_explode()
+	end
 end
 
 function _draw()
-    cls(12)
-    circfill(x+50,y+50,4)
-    print(power)
+ cls(12)
+ circfill(x+60,y+60,r,c)
+ print("press 🅾️/z to shake",25,20,7)
 end
 
 function bottle_shake()
-    x = rnd(2)
-    y = rnd(2)
+ x = rnd(2)
+ y = rnd(2)
 end
 
 function bottle_explode()
-    power = 0
+ xmax -=1
+ if xmax > 0 then
+ 	r += 1
+ 	for i=0, 10 do
+ 		c += 0.25
+ 	end
+ end
 end
 
 
